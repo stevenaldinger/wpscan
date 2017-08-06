@@ -59,10 +59,7 @@ email_logs () {
 }
 # ----------------------- [END] email the results logic ---------------------- #
 
-# ----------------------------- [START] main logic --------------------------- #
-if [ "$#" -gt 1 ]; then
-  /wpscan/wpscan.rb "$@"
-else
+run_wpscan_with_env_vars () {
   set_variable_defaults
 
   check_for_user_input
@@ -79,6 +76,4 @@ else
     echo ""
   echo "wp ended...."
   email_logs
-fi
-# ------------------------------ [END] main logic ---------------------------- #
-# sh
+}
