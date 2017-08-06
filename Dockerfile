@@ -14,6 +14,7 @@ RUN chmod a+x /docker/entrypoint.sh \
  && apk upgrade --update && apk add --update --no-cache \
             # runtime dependencies
             libcurl \
+            openssl-dev \
             procps \
  && apk add --no-cache --virtual build-deps \
             alpine-sdk \

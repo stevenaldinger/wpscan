@@ -21,7 +21,7 @@ elsif (defined?(sending_domain)).nil?
 elsif (defined?(email_to)).nil?
   print "No MAILGUN_TO env var. Not sending any emails.\n"
 else
-  print "MAILGUN_API_KEY is defined. Sending email.\n"
+  print "Sending email.\n"
 
   address = "smtp.mailgun.org"
   # port = 587
@@ -42,16 +42,12 @@ else
   # Define the body of the message.
   message.set_text_body(email_body)
 
-  # # Define the HTML text of the message
   # message.set_html_body("<html><body><p>This is the text body of the message</p></body></html>")
-
-  # Other Optional Parameters.
   # message.add_campaign_id("My-Awesome-Campaign")
   # message.header("Customer-Id", "12345")
   message.add_attachment(ENV['LOG_FILE'])
   # message.set_delivery_time("tomorrow 8:00AM PST")
   # message.set_click_tracking(true)
 
-  # Send your message through the client
-  mg_client.send_message(address, message)
+  mailgun.send_message(address, message)
 end
