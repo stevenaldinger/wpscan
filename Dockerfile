@@ -32,7 +32,7 @@ RUN chmod a+x /docker/entrypoint.sh \
 
 COPY . /wpscan
 
-RUN chown -R wpscan:wpscan /wpscan
+RUN chown -R wpscan:wpscan /wpscan /docker
 
 USER wpscan
 
