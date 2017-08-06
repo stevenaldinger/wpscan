@@ -29,7 +29,7 @@ RUN chmod a+x /docker/entrypoint.sh \
  && ln -sf /wpscan /usr/bin/wpscan \
  && apk del --no-cache build-deps \
  && rm -rf /var/cache/apk/* \
- && crontab -l | { cat; echo "00    00       *       *       *       wpscan /bin/sh -c \". /docker/functions.sh && run_wpscan_with_env_vars\""; } | crontab -
+ && crontab -l | { cat; echo "00    00       *       *       *       wpscan /bin/sh -c \". functions.sh && run_wpscan_with_env_vars\""; } | crontab -
 
 COPY . /wpscan
 
