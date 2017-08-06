@@ -22,6 +22,7 @@ RUN chmod a+x /docker/entrypoint.sh \
             zlib-dev \
  && bundle install --system --gemfile=/docker/log_file_emailer/Gemfile $BUNDLER_ARGS \
  && chmod a+x /docker/log_file_emailer/log_file_emailer.rb \
+ && chown -R wpscan:WPScan /docker \
  && ln -sf /docker/log_file_emailer/log_file_emailer.rb /usr/bin/log_file_emailer \
  && bundle install --system --gemfile=/wpscan/Gemfile $BUNDLER_ARGS \
  && ln -sf /wpscan /usr/bin/wpscan \
