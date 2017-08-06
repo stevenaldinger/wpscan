@@ -27,7 +27,7 @@ else
   # port = 587
 
   # Send simple plaintext email message
-  mailgun = Mailgun::Client.new MAILGUN_API_KEY
+  mailgun = Mailgun::Client.new mailgun_api_key
   message = Mailgun::MessageBuilder.new
 
   # Define the from address.

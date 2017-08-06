@@ -2,8 +2,6 @@
 
 set -e
 
-#!/bin/bash
-
 # ----------------------- [START] set variable defaults ---------------------- #
 set_variable_defaults () {
   agent='--random-agent'
@@ -56,26 +54,27 @@ email_logs () {
   export MAILGUN_SUBJECT="wpscan results: ${hostname}"
   export MAILGUN_BODY="$(cat ${log_file})"
   echo "Emailing ${MAILGUN_TO} logs from ${log_file}..."
-  /docker/log_file_emailer/log_file_emailer.rb
+  cp /docker/log_file_emailer/log_file_emailer.rb /wpscan/log_file_emailer.rb
+  ruby log_file_emailer.rb
 }
 # ----------------------- [END] email the results logic ---------------------- #
 
 # ----------------------------- [START] main logic --------------------------- #
-# set_variable_defaults
-#
-# check_for_user_input
-#
-# # make sure log directory exists
-# mkdir -p "${log_path}"
-#
-# # update wpscan bef
-# [ ! -z "${update}" ] && \
-#   sh -c "${update}"
-#
-# # run the scanner and email if successful
-# /wpscan/wpscan.rb "${agent}" --url "${URL}" "${follow_redirection}" --log "${log_file}" "${extra_args}" ||
-#   echo ""
-# echo "wp ended...."
-# email_logs
+set_variable_defaults
+
+check_for_user_input
+
+# make sure log directory exists
+mkdir -p "${log_path}"
+
+# update wpscan bef
+[ ! -z "${update}" ] && \
+  sh -c "${update}"
+
+# run the scanner and email if successful
+/wpscan/wpscan.rb "${agent}" --url "${URL}" "${follow_redirection}" --log "${log_file}" "${extra_args}" ||
+  echo ""
+echo "wp ended...."
+email_logs
 # ------------------------------ [END] main logic ---------------------------- #
-sh
+# sh
